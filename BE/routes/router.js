@@ -4,7 +4,8 @@ const controller = require("../controllers/Book_controller");
 
 router.get("/", controller.getAllBooks);
 router.post("/", controller.addBook);
-router.get("/:name", controller.findLikeBookName);
+router.get("/:id", controller.findBookId);
+// router.get("/:name", controller.findLikeBookName);
 router.put("/:id", controller.updateBook);
-router.delete("/:name", controller.deleteBook);
+router.delete("/:id", controller.deleteBookById);
 module.exports = router;

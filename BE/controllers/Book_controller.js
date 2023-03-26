@@ -1,4 +1,3 @@
-const { TreeRepository } = require("typeorm");
 const Book = require("../model/Book");
 
 exports.getAllBooks = async (req, res, next) => {
@@ -14,19 +13,6 @@ exports.getAllBooks = async (req, res, next) => {
   return res.status(200).json({ books });
 };
 
-exports.findBookName = async (req, res, next) => {
-  const bookName = req.params.bookName;
-  let book;
-  try {
-    book = await Book.findOne({ name: bookName });
-  } catch (err) {
-    console.log(err);
-  }
-  if (!book) {
-    return res.status(404).json({ message: "Book not found" });
-  }
-  return res.status(200).json({ book });
-};
 exports.findLikeBookName = async (req, res, next) => {
   const bookName = req.params.bookName;
   let books;
@@ -41,18 +27,18 @@ exports.findLikeBookName = async (req, res, next) => {
   return res.status(200).json({ books });
 };
 
-exports.deleteBook = async (req, res, next) => {
-  const bookName = req.params.bookName;
-  let result = await this.findBookName({ name: bookName });
+exports.findBookId = async (req, res, next) => {
+  const id = req.params.id;
+  let book;
   try {
-    result = await Book.deleteOne;
+    book = await Book.findById(id);
   } catch (err) {
     console.log(err);
   }
-  if (result.deletedCount === 0) {
-    return res.status(404).json({ message: "Book not found" });
+  if (!book || book.length === 0) {
+    return res.status(404).json({ message: "No books found" });
   }
-  return res.status(200).json({ message: "Book deleted successfully" });
+  return res.status(200).json({ book });
 };
 
 exports.updateBook = async (req, res, next) => {
@@ -101,4 +87,16 @@ exports.addBook = async (req, res, next) => {
   return res.status(201).json({ book });
 };
 
-exports.deleteBook = async (req, res, next) => {};
+exports.deleteBookById = async (req, res, next) => {
+  const id = req.params.id;
+  let book;
+  try {
+    book = await Book.findByIdAndRemove(id);
+  } catch (err) {
+    console.log(err);
+  }
+  if (!book) {
+    return res.status(404).json({ message: "Book not found" });
+  }
+  return res.status(200).json({ message: "Book deleted successfully" });
+};
