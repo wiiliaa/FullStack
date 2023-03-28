@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Book from "./Book";
-import "../../style/book.css";
 
 const URL = "http://localhost:4000/books";
 

@@ -12,7 +12,7 @@ const Book = (props) => {
       .delete(`http://localhost:4000/books/${_id}`)
       .then((res) => res.data)
       .then(() => history("/"))
-      .then(() => history("/books"));
+      .then(() => history("/"));
   };
   return (
     <div className="card">

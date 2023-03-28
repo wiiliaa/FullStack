@@ -46,7 +46,9 @@ const AddBook = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    sendRequest().then(() => history("/books"));
+    sendRequest()
+      .then(() => history("/"))
+      .then(() => history("/"));
   };
 
   return (

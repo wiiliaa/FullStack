@@ -14,9 +14,8 @@ function App() {
       </header>
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Books />} />
           <Route path="/add" element={<AddBook />} />
-          <Route path="/books" element={<Books />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/books/:id" element={<BookDetail />} />
         </Routes>
